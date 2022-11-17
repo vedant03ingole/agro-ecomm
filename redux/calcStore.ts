@@ -1,16 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 
+type InitialState = {
+    value: number
+}
+
+const initialState: InitialState = {
+    value: 0
+}
+
+
 const calcSlice = createSlice({
     name: "calc",
-    initialState: {
-        value: 0
-    },
+    initialState,
     reducers: {    
-        increment: state => {
+        increment: (state) => {
             state.value += 1
         },
-        decrement: state => {
+        decrement: (state) => {
             state.value -= 1
         }
     }
