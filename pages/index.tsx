@@ -2,26 +2,63 @@ import styles from '../styles/Home.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import {increment, decrement} from '../redux/calcStore'
 import type { RootState } from '../redux/store'
+import { GetStaticProps } from 'next'
+import Commerce from '@chec/commerce.js'
 
-export default function Home() {
+import getCommerce from '../lib/commerce'
+import Products from '../components/products'
+import Categories from '../components/categories'
 
-  const dispatch = useDispatch()
-  // const { value } = useSelector((state: number) => state.calc )
-  const value = useSelector((state: RootState) => state.calc.value)
+export default function Home({ products, categories}) {
 
-  const add = () => {
-    dispatch(increment())
-  }
-  const sub = () => {
-    dispatch(decrement())
-  }
-
+  console.log(products , categories)
+  
   return (
     <div className={styles.container}>
-      <h1 className='font-mono text-xl'>Redux dev</h1>
-        <p>{value}</p>
-        <button onClick={add}> + </button>
-        <button onClick={sub}> - </button>
+      <Categories categories={categories}/>
     </div>
   )
 }
+
+
+export const getStaticProps: GetStaticProps = async (context) => {
+
+  //let commerce = new Commerce(process.env.NEXT_PUBLIC_CHEC_PUBLIC_API_KEY)
+  
+  const commerce = getCommerce()
+  console.log(commerce);
+  
+
+  const { data: categories } = await commerce.categories.list()
+  const { data: products } = await commerce.products.list()
+
+  return {
+    props: {
+      categories,
+      products
+    }
+  }
+
+}
+
+
+
+
+
+// const dispatch = useDispatch()
+// // const { value } = useSelector((state: number) => state.calc )
+// const value = useSelector((state: RootState) => state.calc.value)
+
+// const add = () => {
+  //   dispatch(increment())
+  // }
+  // const sub = () => {
+    //   dispatch(decrement())
+    // }
+   
+   
+   
+    {/* <h1 className='font-mono text-xl'>Redux dev</h1>
+      <p>{value}</p>
+      <button className="p-5 border border-spacing-2 m-5 rounded-lg" onClick={sub}> - </button>
+      <button className="p-5 border border-spacing-2 m-5 rounded-lg" onClick={add}> + </button> */}
