@@ -24,6 +24,28 @@ export async function getServerSideProps({ params }) {
     }
 }
 
+
+// export async function getStaticPaths({ params }) {
+    
+//     const { slug } = params
+
+//     const commerce = getCommerce()
+
+//     // if(commerce) {
+//       const category = await commerce.categories.retrieve(slug, {type: "slug"})
+//       const { data : products } = await commerce.products.list({ category_slug : slug})
+    
+//     // console.log(products);
+
+//     return {
+//         props: {
+//             products,
+//             category
+//         },
+//     }
+// }
+
+
 const CategoryPage =  ({category, products }) => {
 
   return (

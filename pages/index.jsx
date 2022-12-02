@@ -11,7 +11,7 @@ import Categories from '../components/CategoryPage'
 
 export default function Home({ products, categories}) {
 
-  console.log(products , categories)
+  // console.log(products , categories)
   
   return (
     <div className={styles.container} >
