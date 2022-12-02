@@ -2,12 +2,14 @@ import Commerce from '@chec/commerce.js'
 
 let commerce = null 
 
-const getCommerce = (commercePublicKey) => {
+const getCommerce = () => {
   if(commerce) {
     return commerce
   }
   else {
-    const publicKey = commercePublicKey || process.env.NEXT_PUBLIC_CHEC_PUBLIC_API_KEY
+    // const publicKey = commercePublicKey || process.env.NEXT_PUBLIC_CHEC_PUBLIC_API_KEY
+    const publicKey = process.env.NEXT_PUBLIC_CHEC_PUBLIC_API_KEY
+
     const devEnviornment = process.env.NODE_ENV == "development"
 
     if(devEnviornment && !publicKey ) {

@@ -7,15 +7,15 @@ import Commerce from '@chec/commerce.js'
 
 import getCommerce from '../lib/commerce'
 import Products from '../components/products'
-import Categories from '../components/categories'
+import Categories from '../components/CategoryPage'
 
 export default function Home({ products, categories}) {
 
   console.log(products , categories)
   
   return (
-    <div className={styles.container}>
-      <Categories categories={categories}/>
+    <div className={styles.container} >
+      <Categories categories={categories} />
     </div>
   )
 }
@@ -26,7 +26,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   //let commerce = new Commerce(process.env.NEXT_PUBLIC_CHEC_PUBLIC_API_KEY)
   
   const commerce = getCommerce()
-  console.log(commerce);
   
 
   const { data: categories } = await commerce.categories.list()
