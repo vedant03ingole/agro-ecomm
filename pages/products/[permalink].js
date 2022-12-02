@@ -6,7 +6,9 @@ export async function getServerSideProps({ params }) {
     const { permalink } = params
     const commerce = getCommerce()
 
-    const product = await commerce.products.retrieve(permalink, { type: 'permalink'})
+    // if(commerce) 
+        const product = await commerce?.products.retrieve(permalink, { type: 'permalink'})
+
 
     return { 
         props: {

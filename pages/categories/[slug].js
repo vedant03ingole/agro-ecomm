@@ -9,10 +9,11 @@ export async function getServerSideProps({ params }) {
     const { slug } = params
     // console.log("slug", slug);
     const commerce = getCommerce()
+
+    // if(commerce) {
+      const category = await commerce?.categories.retrieve(slug, {type: "slug"})
+      const { data : products } = await commerce?.products.list({ category_slug : slug})
     
-    const category = await commerce.categories.retrieve(slug, {type: "slug"})
-    
-    const { data : products } = await commerce.products.list({ category_slug : slug})
     // console.log(products);
 
     return {
