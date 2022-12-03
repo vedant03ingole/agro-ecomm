@@ -1,6 +1,8 @@
 import Commerce from '@chec/commerce.js'
 
-let commerce = null 
+
+let commerce
+
 
 const getCommerce = () => {
   if(commerce) {

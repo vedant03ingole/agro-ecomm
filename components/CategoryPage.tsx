@@ -1,6 +1,11 @@
 import React from 'react'
 
-const Categories = ({categories}) => {
+
+type CategoryProps = {
+  categories: object
+}
+
+const Categories = ({categories}: CategoryProps) => { 
     
   return (
     <div>

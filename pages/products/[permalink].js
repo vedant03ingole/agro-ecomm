@@ -7,7 +7,7 @@ export async function getServerSideProps({ params }) {
     const commerce = getCommerce()
 
     // if(commerce) 
-        const product = await commerce?.products.retrieve(permalink, { type: 'permalink'})
+        const product = await commerce.products.retrieve(permalink, { type: 'permalink'})
 
 
     return { 

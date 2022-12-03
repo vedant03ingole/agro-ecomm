@@ -4,37 +4,76 @@ import getCommerce from '../../lib/commerce'
 
 
 
-export async function getServerSideProps({ params }) {
-    
-    const { slug } = params
-    // console.log("slug", slug);
-    const commerce = getCommerce()
 
-    // if(commerce) {
-      const category = await commerce?.categories.retrieve(slug, {type: "slug"})
-      const { data : products } = await commerce?.products.list({ category_slug : slug})
+export async function getStaticPaths() {
+  
+  const commerce = getCommerce()
+  const { data: categories } = await commerce.categories.list()
+
+  const paths = categories.map(category => {
+    return {
+      params: {
+        slug: category.slug
+      }
+    }
+  })
+
+  return {
+    paths,
+    fallback: false
+  }
+}
+
+export async function getStaticProps({ params }) {
+  
+  const { slug } = params
+  
+  const commerce = getCommerce()
+  
+  // if(commerce) {
+    const category = await commerce.categories.retrieve(slug, { type: "slug" })
+    const { data: products } = await commerce.products.list({ category_slug: slug })
     
     // console.log(products);
-
+    
     return {
-        props: {
-            products,
-            category
-        },
-    }
+      props: {
+      products,
+      category
+    },
+  }
 }
 
 
-// export async function getStaticPaths({ params }) {
-    
-//     const { slug } = params
+const CategoryPage = ({ category, products }) => {
 
+  return (
+    <div>
+      <h1>{category.name}</h1>
+      <pre>{JSON.stringify(products, null, 2)}</pre>
+    </div>
+  )
+}
+
+export default CategoryPage
+
+
+
+
+
+
+
+
+// export async function getServerSideProps({ params }) {
+
+//     const { slug } = params
+//     // console.log("slug", slug);
 //     const commerce = getCommerce()
 
 //     // if(commerce) {
-//       const category = await commerce.categories.retrieve(slug, {type: "slug"})
-//       const { data : products } = await commerce.products.list({ category_slug : slug})
-    
+//       const category = await commerce?.categories.retrieve(slug, {type: "slug"})
+//       const { data : products } = await commerce?.products.list({ category_slug : slug})
+
 //     // console.log(products);
 
 //     return {
@@ -44,16 +83,3 @@ export async function getServerSideProps({ params }) {
 //         },
 //     }
 // }
-
-
-const CategoryPage =  ({category, products }) => {
-
-  return (
-    <div>
-        <h1>{category.name}</h1>
-        <pre>{JSON.stringify(products, null, 2)}</pre>
-    </div>
-  )
-}
-
-export default CategoryPage

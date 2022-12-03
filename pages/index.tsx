@@ -11,7 +11,7 @@ import Categories from '../components/CategoryPage'
 
 export default function Home({ products, categories}) {
 
-  // console.log(products , categories)
+  // console.log("category array",categories)
   
   return (
     <div className={styles.container} >
@@ -21,11 +21,13 @@ export default function Home({ products, categories}) {
 }
 
 
-export const getStaticProps = async (context) => {
+export const getStaticProps = async () => {
 
   //let commerce = new Commerce(process.env.NEXT_PUBLIC_CHEC_PUBLIC_API_KEY)
   
   const commerce = getCommerce()
+  console.log("commerce", commerce.categories)
+  
   
 
   const { data: categories } = await commerce.categories.list()
