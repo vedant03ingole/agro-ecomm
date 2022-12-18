@@ -33,3 +33,22 @@ a {
     background: rgb(4, 4, 4);
   }
 }
+
+h1{
+  color: aqua;
+  font-size: x-large;
+}
+
+h2{
+  color: chartreuse;
+  font-size: medium;
+}
+
+h3{
+  color: darkolivegreen;
+  font-size: small;
+}
+
+p{
+  font-size: small;
+}

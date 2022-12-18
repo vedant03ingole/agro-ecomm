@@ -4,6 +4,7 @@ import {increment, decrement} from '../redux/calcStore'
 // import type { RootState } from '../redux/store'
 import { GetStaticProps } from 'next'
 import Commerce from '@chec/commerce.js'
+import * as React  from 'react'
 
 import getCommerce from '../lib/commerce'
 import Products from '../components/products'
@@ -16,6 +17,13 @@ export default function Home({ products, categories}) {
   return (
     <div className={styles.container} >
       <Categories categories={categories} />
+      <div>
+        {/* {
+          categories ? categories.children.map((category) => (
+              
+          ))
+        } */}
+      </div>
     </div>
   )
 }
@@ -26,7 +34,7 @@ export const getStaticProps = async () => {
   //let commerce = new Commerce(process.env.NEXT_PUBLIC_CHEC_PUBLIC_API_KEY)
   
   const commerce = getCommerce()
-  console.log("commerce", commerce.categories)
+  // console.log("commerce", commerce.categories)
   
   
 
